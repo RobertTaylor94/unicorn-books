@@ -23,7 +23,7 @@ struct ContentView: View {
                     .navigationTitle("Library")
             }
             .tabItem{
-                Label("Library", systemImage: "building.columns.circle")
+                Label("Library", systemImage: "books.vertical.circle")
             }.tag(Tab.library)
             NavigationStack {
                 TrackerView()

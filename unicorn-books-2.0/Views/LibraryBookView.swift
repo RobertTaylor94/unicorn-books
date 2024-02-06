@@ -9,7 +9,22 @@ import SwiftUI
 
 struct LibraryBookView: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack {
+            BookCoverView(title: "They Both Die at the End")
+            BookProgressView(progress: 0.6, label: "60%")
+        }
+    }
+}
+
+struct BookCoverView: View {
+    
+    var title: String
+    
+    var body: some View {
+        
+        VStack {
+            Text(title)
+        }
     }
 }
 

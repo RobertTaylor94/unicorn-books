@@ -9,7 +9,14 @@ import SwiftUI
 
 struct LibraryView: View {
     var body: some View {
-        Text("Hello, Library!")
+        ScrollView(.horizontal) {
+            LazyHStack {
+                ForEach(1...10, id: \.self) { count in
+                    LibraryBookView()
+                        .padding()
+                }
+            }
+        }
     }
 }
 
