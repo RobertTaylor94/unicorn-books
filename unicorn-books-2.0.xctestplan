@@ -1,0 +1,28 @@
+{
+  "configurations" : [
+    {
+      "id" : "CEEB3533-9D0E-4947-B704-B3995037F048",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:unicorn-books-2.0.xcodeproj",
+      "identifier" : "03F02B0C2B716D39007F6B5D",
+      "name" : "unicorn-books-2.0"
+    }
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:unicorn-books-2.0.xcodeproj",
+        "identifier" : "03F02B202B716D3D007F6B5D",
+        "name" : "unicorn-books-2.0Tests"
+      }
+    }
+  ],
+  "version" : 1
+}
