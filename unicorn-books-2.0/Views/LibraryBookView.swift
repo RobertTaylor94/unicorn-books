@@ -21,9 +21,9 @@ struct BookCoverView: View {
     var title: String
     
     var body: some View {
-        
         VStack {
             Text(title)
+            AsyncImage(url: URL(string: "https://example.com/icon.png"))
         }
     }
 }
