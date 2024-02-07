@@ -39,8 +39,14 @@ struct SearchView: View {
         .padding(20)
         
         List {
-            
+            SearchItemView(bookTitle: "The Velvet Rage", bookAuthor: "Alan Downs")
+            SearchItemView(bookTitle: "The Lord of the Rings: The Fellowship of the Ring", bookAuthor: "J. R. R. Tolkein")
+            SearchItemView()
+            SearchItemView()
+            SearchItemView(bookTitle: "Harry Potter and the Goblet of Fire", bookAuthor: "J. K. Rowling")
+            SearchItemView()
         }
+        .listStyle(.plain)
         .onTapGesture {
             isSearchFocused = false
         }
