@@ -33,7 +33,7 @@ struct ContentView: View {
                 Label("Tracker", systemImage: "timer")
             }.tag(Tab.tracker)
             NavigationStack {
-                SearchView(searchText: "")
+                SearchView()
                     .navigationTitle("Search")
             }
             .tabItem{

@@ -9,21 +9,23 @@ import SwiftUI
 
 struct SearchView: View {
     
-    @State var searchText: String
+    @State var searchText: String = ""
+    @FocusState var isSearchFocused: Bool
     
     var body: some View {
         HStack {
             Image(systemName: "magnifyingglass")
             
-            TextField("search", text: $searchText, onEditingChanged: { isEditing in
-//                self.showCancelButton = true
-            }, onCommit: {
-//                self.fetcher.getJsonData(string: searchText)
-            })
-            .foregroundColor(.primary)
-            .accessibilityIdentifier("Search Text Field")
+            TextField("search", text: $searchText)
+                .onSubmit {
+                    print("searching")
+                }
+                .foregroundColor(.primary)
+                .accessibilityIdentifier("Search Text Field")
+                .submitLabel(.search)
+                .focused($isSearchFocused)
         
-//          'x' button appears in search bar when text is entered and will clear all text on click
+// 'x' button appears in search bar when text is entered and will clear all text on click
             Button(action: {
                 searchText = ""
             }) {
@@ -37,10 +39,14 @@ struct SearchView: View {
         .padding(20)
         
         List {
+            
+        }
+        .onTapGesture {
+            isSearchFocused = false
         }
     }
 }
 
 #Preview {
-    SearchView(searchText: "")
+    SearchView()
 }
