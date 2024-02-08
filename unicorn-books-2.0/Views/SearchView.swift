@@ -6,25 +6,29 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct SearchView: View {
     
     @State var searchText: String = ""
     @FocusState var isSearchFocused: Bool
+//    @Environment(\.modelContext) private var modelContext
+    @ObservedObject var networkmanager: NetworkManager
     
     var body: some View {
         HStack {
             Image(systemName: "magnifyingglass")
             
             TextField("search", text: $searchText)
-                .onSubmit {
-                    print("searching")
-                }
                 .foregroundColor(.primary)
                 .accessibilityIdentifier("Search Text Field")
                 .submitLabel(.search)
                 .focused($isSearchFocused)
-        
+                .onSubmit {
+                    Task {
+                        try await networkmanager.getBookResults(searchText: searchText)
+                    }
+                }
 // 'x' button appears in search bar when text is entered and will clear all text on click
             Button(action: {
                 searchText = ""
@@ -38,13 +42,8 @@ struct SearchView: View {
         .cornerRadius(10.0)
         .padding(20)
         
-        List {
-            SearchItemView(bookTitle: "The Velvet Rage", bookAuthor: "Alan Downs")
-            SearchItemView(bookTitle: "The Lord of the Rings: The Fellowship of the Ring", bookAuthor: "J. R. R. Tolkein")
-            SearchItemView()
-            SearchItemView()
-            SearchItemView(bookTitle: "Harry Potter and the Goblet of Fire", bookAuthor: "J. K. Rowling")
-            SearchItemView()
+        List(networkmanager.results, id: \.id) { item in
+            SearchItemView(bookTitle: item.volumeInfo.title, bookAuthor: "")
         }
         .listStyle(.plain)
         .onTapGesture {
@@ -54,5 +53,5 @@ struct SearchView: View {
 }
 
 #Preview {
-    SearchView()
+    SearchView(networkmanager: NetworkManager())
 }

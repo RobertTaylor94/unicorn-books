@@ -8,9 +8,10 @@
 import SwiftUI
 
 struct LibraryBookView: View {
+    
     var body: some View {
         VStack {
-            BookCoverView(title: "They Both Die at the End")
+            BookCoverView()
             BookProgressView(progress: 0.6, label: "60%")
         }
     }
@@ -18,12 +19,20 @@ struct LibraryBookView: View {
 
 struct BookCoverView: View {
     
-    var title: String
+    var bookTitle: String = "They Both Die at the End"
+    var bookAuthor: String = "Adam Silvera"
     
     var body: some View {
         VStack {
-            Text(title)
-            AsyncImage(url: URL(string: "https://example.com/icon.png"))
+            Text(bookTitle)
+            Text(bookAuthor)
+            AsyncImage(url: URL(string: "https://example.com/icon.png")) { image in
+                image.resizable()
+            }
+            placeholder: {
+                ProgressView()
+            }
+            .frame(width: 200, height: 320)
         }
     }
 }

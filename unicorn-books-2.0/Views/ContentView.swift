@@ -11,10 +11,11 @@ import SwiftData
 struct ContentView: View {
     
     enum Tab {
-        case library, tracker, search
+        case library, stats, friends, search
     }
     
     @State private var selectedTab: Tab = .library
+    @StateObject var networkManager = NetworkManager()
     
     var body: some View {
         TabView() {
@@ -26,14 +27,21 @@ struct ContentView: View {
                 Label("Library", systemImage: "books.vertical.circle")
             }.tag(Tab.library)
             NavigationStack {
-                TrackerView()
-                    .navigationTitle("Tracker")
+                StatsView()
+                    .navigationTitle("Stats")
             }
             .tabItem{
-                Label("Tracker", systemImage: "timer")
-            }.tag(Tab.tracker)
+                Label("Stats", systemImage: "chart.pie")
+            }.tag(Tab.stats)
             NavigationStack {
-                SearchView()
+                FriendsView()
+                    .navigationTitle("Friends")
+            }
+            .tabItem{
+                Label("Friends", systemImage: "person.2.circle")
+            }.tag(Tab.friends)
+            NavigationStack {
+                SearchView(networkmanager: networkManager)
                     .navigationTitle("Search")
             }
             .tabItem{
@@ -46,5 +54,5 @@ struct ContentView: View {
 
 #Preview {
     ContentView()
-        .modelContainer(for: Item.self, inMemory: true)
+        .modelContainer(for: Book.self, inMemory: true)
 }
